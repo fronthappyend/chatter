@@ -9,6 +9,8 @@ app.get('/', (req, res, next) => res.sendFile(__dirname + '/public/index.html'))
 
 io.on('connection', socket => {
     console.log('user connected');
-    socket.emit('message', { manny: 'hey how are you'});
-    socket.on('another event', data => console.log(data));
+    socket.on('message', msg => {
+        console.log('message ' + msg);
+        io.emit('message', msg);
+    })
 })
